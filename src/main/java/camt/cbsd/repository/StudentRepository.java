@@ -7,4 +7,5 @@ import org.springframework.data.repository.CrudRepository;
  * Created by CAMT on 4/7/2017.
  */
 public interface StudentRepository extends CrudRepository<Student,Long> {
+    Student findById(long id);
 }

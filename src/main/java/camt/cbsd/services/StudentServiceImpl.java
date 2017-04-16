@@ -4,9 +4,11 @@ import camt.cbsd.dao.StudentDao;
 import camt.cbsd.entity.Student;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -34,14 +36,22 @@ public class StudentServiceImpl implements StudentService {
         this.imageServerDir = imageServerDir;
     }
 
+    @Transactional
     public List<Student> getStudents(){
-
-        return studentDao.getStudents();
+        List<Student> students = studentDao.getStudents();
+        for (Student student : students) {
+            Hibernate.initialize(student.getEnrolledCourse());
+        }
+        return students;
     }
 
     @Override
+    @Transactional
     public Student findById(long id) {
-        return studentDao.findById(id);
+
+        Student student = studentDao.findById(id);
+        Hibernate.initialize(student.getEnrolledCourse());
+        return student;
     }
 
     @Override
