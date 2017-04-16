@@ -68,11 +68,11 @@ public class DataLoader implements ApplicationRunner {
         studentDao.addStudent(student3);
 
         student1.addCourse(course1);
-
+        student1.addCourse(course1);
+        student2.addCourse(course2);
         student2.addCourse(course3);
-
-
-        student3.addCourse(course2);
+        student3.addCourse(course1);
+        student3.addCourse(course3);
 
 
 

@@ -37,7 +37,7 @@ public class Student {
     @NonNull String description;
 
 
-    @OneToMany
+    @ManyToMany
     List<Course> enrolledCourse;
 
 
